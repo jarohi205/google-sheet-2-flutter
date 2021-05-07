@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
 
   getFeedbackFromSheet() async {
     var raw = await http.get(
-        "https://script.google.com/macros/s/AKfycbzbTEO2B2lxO_kEmH7juC9RLkZByycz_QViG7LOeaJ4FYB38gs/exec");
+        "https://script.google.com/macros/s/AKfycbzwxf5mtI1XC62vTUsWkmag-4ToDL5mZNvFPTH9b-SuwM_AIeeQt9vq5y1Jnp48c1cNdQ/exec");
 
     var jsonFeedback = convert.jsonDecode(raw.body);
     print('this is json Feedback $jsonFeedback');
@@ -23,16 +23,20 @@ class _HomeState extends State<Home> {
     jsonFeedback.forEach((element) {
       print('$element THIS IS NEXT>>>>>>>');
       FeedbackModel feedbackModel = new FeedbackModel();
-      feedbackModel.name = element['name'];
-      feedbackModel.feedback = element['feedback'];
-      feedbackModel.profilePic = element['profile_pic'];
-      feedbackModel.source = element['source'];
-      feedbackModel.sourceUrl = element["source_url"];
+      // feedbackModel.name = element['name'];
+      // feedbackModel.feedback = element['feedback'];
+      // feedbackModel.profilePic = element['profile_pic'];
+      // feedbackModel.source = element['source'];
+      // feedbackModel.sourceUrl = element["source_url"];
+
+      feedbackModel.NameOfHospital= element['NameOfHospital'];
+      feedbackModel.PhoneNumber = element['PhoneNumber'];
 
       feedbacks.add(feedbackModel);
     });
 
-    //print('${feedbacks[0]}');
+    print('${feedbacks[0]}');
+    // print('${feedbacks[1]}');
   }
 
   @override
@@ -45,7 +49,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Students"),
+        title: Text("Hospitals"),
         elevation: 0,
       ),
       body: Container(
@@ -53,11 +57,13 @@ class _HomeState extends State<Home> {
             itemCount: feedbacks.length,
             itemBuilder: (context, index) {
               return FeedbackTile(
-                profilePic: feedbacks[index].profilePic,
-                name: feedbacks[index].name,
-                source: feedbacks[index].source,
-                feedback: feedbacks[index].feedback,
-                sourceUrl: feedbacks[index].sourceUrl,
+                // profilePic: feedbacks[index].profilePic,
+                // name: feedbacks[index].name,
+                // source: feedbacks[index].source,
+                // feedback: feedbacks[index].feedback,
+                // sourceUrl: feedbacks[index].sourceUrl,
+                NameOfHospital: feedbacks[index].NameOfHospital,
+                PhoneNumber: feedbacks[index].PhoneNumber
               );
             }),
       ),
@@ -66,9 +72,9 @@ class _HomeState extends State<Home> {
 }
 
 class FeedbackTile extends StatelessWidget {
-  final String profilePic, name, source, feedback, sourceUrl;
+  final String NameOfHospital, PhoneNumber;
   FeedbackTile(
-      {this.profilePic, this.name, this.source, this.feedback, this.sourceUrl});
+      {this.NameOfHospital, this.PhoneNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -79,19 +85,20 @@ class FeedbackTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                  height: 40,
-                  width: 40,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(40)),
-                      child: Image.network(profilePic))),
+              // Container(
+              //     height: 40,
+              //     width: 40,
+              //     child: ClipRRect(
+              //         borderRadius: BorderRadius.all(Radius.circular(40)),
+              //         child: Image.network(profilePic))),
               SizedBox(width: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name),
+                  Text(NameOfHospital),
+                  // Text(PhoneNumber),
                   Text(
-                    'from $source',
+                    'from $PhoneNumber',
                     style: TextStyle(color: Colors.grey),
                   )
                 ],
@@ -99,7 +106,7 @@ class FeedbackTile extends StatelessWidget {
             ],
           ),
           SizedBox(height: 16),
-          Text(feedback)
+          // Text(feedback)
         ],
       ),
     );
