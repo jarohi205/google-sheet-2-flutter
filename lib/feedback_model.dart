@@ -1,28 +1,44 @@
 class FeedbackModel {
-  String profilePic;
-  String name;
-  String source;
-  String feedback;
-  String sourceUrl;
+  String NameOfHospital;
+  String PhoneNumber;
+  String State;
+  String City;
+  String Status;
+  String DateAndTimeOfVerification;
+  String SpecialNotes;
+  String Rank;
 
   FeedbackModel(
-      {this.feedback, this.name, this.profilePic, this.source, this.sourceUrl});
+      {this.NameOfHospital,
+      this.PhoneNumber,
+      this.State,
+      this.City,
+      this.Status,
+      this.DateAndTimeOfVerification,
+      this.SpecialNotes,
+      this.Rank});
 
   factory FeedbackModel.fromJson(dynamic json) {
     return FeedbackModel(
-      feedback: "${json['feedback']}",
-      name: "${json['name']}",
-      profilePic: "${json['profile_pic']}",
-      source: "${json['source']}",
-      sourceUrl: "${json['source_url']}",
+      NameOfHospital: "${json['NameOfHospital']}",
+      PhoneNumber: "${json['PhoneNumber']}",
+      State: "${json['State']}",
+      City: "${json['City']}",
+      Status: "${json['Status']}",
+      DateAndTimeOfVerification: "${json['DateAndTimeOfVerification']}",
+      SpecialNotes: "${json['SpecialNotes']}",
+      Rank: "${json['Rank']}",
     );
   }
 
   Map toJson() => {
-        "profile_pic": profilePic,
-        "source": source,
-        "source_url": sourceUrl,
-        "name": name,
-        "feedback": feedback
+        "NameOfHospital": NameOfHospital,
+        "PhoneNumber": PhoneNumber,
+        "State": State,
+        "City": City,
+        "Status": Status,
+        "DateAndTimeOfVerification":DateAndTimeOfVerification,
+        "SpecialNotes":SpecialNotes,
+        "Rank":Rank
       };
 }
